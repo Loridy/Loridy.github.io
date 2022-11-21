@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 100%;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background: url("../image/homepage_background.jpg") no-repeat center fixed;
+    background-size: cover;
+    font-family: "Bradley Hand", cursive;
+    color:rgb(130, 255, 228);
+    font-size: 1.5rem;
+}
+
+.profile{
+    width: 75%;
+    background-color: rgb(0.5, 0.5, 0.5, 0.5);
+    border-radius: 0.25rem;
+    box-shadow: hsla(0, 0%, 0%, 0.6) 0.625rem 0.625rem 5rem;
+}
+
+.header, .content{
+    width: 95%;
+    margin: 0 auto;
+}
+
+.header, .links{
+    margin: 0 auto;
+}
+
+.header .profile-img{
+    margin-top: -3.75rem;
+}
+
+.header img{
+    border-radius: 50%;
+    height: 7.5rem;
+    width: 7.5rem;
+}
+
+.content{
+    padding: 2.5% 5%;
+}
+
+.content .about{
+    padding-top: 1.25rm;
+    margin-bottom: 3%;
+    text-align: justify;
+}
+.content ul{
+    list-style-type: none;
+}
+.content li{
+    display: inline;
+}
