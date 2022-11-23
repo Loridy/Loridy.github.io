@@ -25,6 +25,15 @@ body{
     box-shadow: hsla(0, 0%, 0%, 0.6) 0.625rem 0.625rem 5rem;
 }
 
+.profile .header{
+    text-align: center;
+}
+
+.profile .profile-other{
+    margin: 1.25rem auto 1.25rem 3%;
+    text-align: left;
+}
+
 .header, .content{
     width: 95%;
     margin: 0 auto;
@@ -44,12 +53,24 @@ body{
     width: 7.5rem;
 }
 
+.header img:hover{
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+    filter: grayscale(20%);
+}
+
+.head li{
+    font-size: 1.875rem;
+}
+
 .header a{
     color: rgb(130, 255, 228);
+    text-decoration: none;
 }
 
 .content{
     padding: 2.5% 5%;
+    border-top: 0.125rem solid rgb(130, 255, 228);
 }
 
 .content .about{
@@ -57,12 +78,29 @@ body{
     margin-bottom: 3%;
     text-align: justify;
 }
+
+.content .links{
+    text-align: center;
+}
+
 .content ul{
     list-style-type: none;
 }
 .content li{
     display: inline;
+    letter-spacing: 0.375rem;
 }
 .content li a{
     color: rgb(130, 255, 228);
+    font-size: 1.875rem;
+}
+
+/* .profile-school:hover, .profile-contact:hover, .profile-email:hover, .github:hover, .linkedin:hover, .instagram:hover{
+    transform: scale(1.5);
+    transition: all 0.3s ease-in-out;
+} */
+
+i:hover{
+    transform: scale(1.05);
+    transition: all 0.1s ease-in-out;
 }
