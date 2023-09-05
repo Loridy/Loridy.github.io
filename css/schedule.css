@@ -1,13 +1,6 @@
-/* body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  min-height: 100vh;
-  padding: 4rem 0;
-  font-family: -system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-} */
-
+*{
+  text-decoration: none;
+}
 .bkgCalViewcontainer { 
   position: relative; 
   top: 0px; 
@@ -17,7 +10,7 @@
   height:2em; 
 } 
 .bkgCalViewWDHeader, .bkgCalViewEmptyCell{ 
-  width: 10em; 
+  width: 18em; 
 } 
 .bkgCalViewbg { 
   box-sizing:border-box; 
@@ -48,7 +41,7 @@
   -webkit-box-sizing:border-box; 
   font-family:Arial,Helvetica,sans-serif; 
   font-size:10pt; 
-  width:3em; 
+  width:5em; 
   border-right: 1px solid #CCCCCC; 
 } 
 .bkgCalViewemptycell { 
@@ -97,3 +90,7 @@
   cursor: pointer; 
   border: 2px dashed #00A0FF; 
 } 
+a{
+  text-decoration: none;
+  color: #000000;
+}

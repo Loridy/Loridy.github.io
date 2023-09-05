@@ -9,13 +9,14 @@
 body{
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     height: 100vh;
     width: 100vw;
     background-size: cover;
     font-family: "Bradley Hand", cursive;
     color:rgb(130, 255, 228);
     font-size: 1.5rem;
+    margin: 1px;
 }
 
 a{
