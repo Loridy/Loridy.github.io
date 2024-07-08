@@ -307,7 +307,148 @@ setTimeout(function(){
     };
 
     request.send();
-}, 5000)
+setTimeout(function(){
+    var request = new XMLHttpRequest();
+    var latest = "2024/07/06 12:07:00";
+    request.open('GET', './data/data2.json', true);
+
+    request.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            var data = JSON.parse(this.responseText);
+    
+            var heartRate_data = data['heart_rate'];
+            var temperature_data = data.temperature;
+            var locations_data = data.locations;
+            var alerts_data = data.alerts;
+    
+            // Convert the strings to Date objects
+            var dateObjects = Object.entries(heartRate_data).map(function([key, value]) {
+                return {time: new Date(key), temperature: value};
+            });
+            
+            // Sort the Date objects
+            dateObjects.sort(function(a, b) {
+                return b.time - a.time;
+            });
+    
+            var latestPairs = dateObjects.slice(0, 5);
+            var table = document.getElementById('heart-rate');
+            while (table.rows.length > 0) {
+                table.deleteRow(0);
+            }
+            latestPairs.forEach(function(pair) {
+                var formattedTime = formatDate(pair.time);
+                console.log(formattedTime, pair.temperature);
+                var newRow = table.insertRow();
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                cell1.innerHTML = formattedTime;
+                cell2.innerHTML = pair.temperature;
+                if (pair.time > new Date(latest)) {
+                    cell1.style.color = "red";
+                    cell2.style.color = "red";
+                    cell1.style.fontWeight = "bold";
+                    cell2.style.fontWeight = "bold";
+                }
+                setTimeout(function() {
+                    newRow.classList.add('fade-in');
+                  }, 1000);
+            });
+    
+    
+            var dateObjects = Object.entries(temperature_data).map(function([key, value]) {
+                return {time: new Date(key), temperature: value};
+            });
+            
+            // Sort the Date objects
+            dateObjects.sort(function(a, b) {
+                return b.time - a.time;
+            });
+    
+            var latestPairs = dateObjects.slice(0, 5);
+            var table = document.getElementById('temperature');
+            while (table.rows.length > 0) {
+                table.deleteRow(0);
+            }
+            latestPairs.forEach(function(pair) {
+                var formattedTime = formatDate(pair.time);
+                console.log(formattedTime, pair.temperature);
+                var newRow = table.insertRow();
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                cell1.innerHTML = formattedTime;
+                cell2.innerHTML = pair.temperature;
+                if (pair.time > new Date(latest)) {
+                    cell1.style.color = "red";
+                    cell2.style.color = "red";
+                    cell1.style.fontWeight = "bold";
+                    cell2.style.fontWeight = "bold";
+                }
+            });
+    
+            var dateObjects = Object.entries(locations_data).map(function([key, value]) {
+                return {time: new Date(key), temperature: value};
+            });
+            
+            // Sort the Date objects
+            dateObjects.sort(function(a, b) {
+                return b.time - a.time;
+            });
+    
+            var latestPairs = dateObjects.slice(0, 5);
+            var table = document.getElementById('locations');
+            while (table.rows.length > 0) {
+                table.deleteRow(0);
+            }
+            latestPairs.forEach(function(pair) {
+                var formattedTime = formatDate(pair.time);
+                console.log(formattedTime, pair.temperature);
+                var newRow = table.insertRow();
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                cell1.innerHTML = formattedTime;
+                cell2.innerHTML = pair.temperature;
+                if (pair.time > new Date(latest)) {
+                    cell1.style.color = "red";
+                    cell2.style.color = "red";
+                    cell1.style.fontWeight = "bold";
+                    cell2.style.fontWeight = "bold";
+                }
+            });
+    
+            var dateObjects = Object.entries(alerts_data).map(function([key, value]) {
+                return {time: new Date(key), temperature: value};
+            });
+            
+            // Sort the Date objects
+            dateObjects.sort(function(a, b) {
+                return b.time - a.time;
+            });
+    
+            var latestPairs = dateObjects.slice(0, 5);
+            var table = document.getElementById('alerts');
+            while (table.rows.length > 0) {
+                table.deleteRow(0);
+            }
+            latestPairs.forEach(function(pair) {
+                var formattedTime = formatDate(pair.time);
+                var newRow = table.insertRow();
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                cell1.innerHTML = formattedTime;
+                cell2.innerHTML = pair.temperature;
+                if (pair.time > new Date(latest)) {
+                    cell1.style.color = "red";
+                    cell2.style.color = "red";
+                    cell1.style.fontWeight = "bold";
+                    cell2.style.fontWeight = "bold";
+                }
+            });
+        }
+    };
+
+    request.send();
+}, 5000)}, 5000)
 
 
 
