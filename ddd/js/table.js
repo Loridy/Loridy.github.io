@@ -164,7 +164,7 @@ request.open('GET', './data/data1.json', true);
     request.send();
 
 
-var latest = "2024/07/06 12:06:00";
+var latest = "2024/07/09 11:36:00";
 
 
 setTimeout(function(){
@@ -309,7 +309,7 @@ setTimeout(function(){
     request.send();
 setTimeout(function(){
     var request = new XMLHttpRequest();
-    var latest = "2024/07/06 12:07:00";
+    var latest = "2024/07/09 11:37:00";
     request.open('GET', './data/data2.json', true);
 
     request.onreadystatechange = function() {
