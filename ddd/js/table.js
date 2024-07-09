@@ -46,10 +46,10 @@
 // }
 
 
-// // ALERTS
+// // blood
 
 // try {
-//     var table = document.getElementById('alerts');
+//     var table = document.getElementById('blood');
 //     var newRow = table.insertRow();
 //     var cell1 = newRow.insertCell(0);
 //     var cell2 = newRow.insertCell(1);
@@ -72,7 +72,9 @@ request.open('GET', './data/data1.json', true);
             var heartRate_data = data['heart_rate'];
             var temperature_data = data.temperature;
             var locations_data = data.locations;
-            var alerts_data = data.alerts;
+            var blood_data = data.blood;
+            var w_data = data.w;
+            var t_data = data.t;
     
             // Convert the strings to Date objects
             var dateObjects = Object.entries(heartRate_data).map(function([key, value]) {
@@ -95,6 +97,49 @@ request.open('GET', './data/data1.json', true);
                 cell1.innerHTML = formattedTime;
                 cell2.innerHTML = pair.temperature;
             });
+
+            var dateObjects = Object.entries(t_data).map(function([key, value]) {
+                return {time: new Date(key), temperature: value};
+            });
+            
+            // Sort the Date objects
+            dateObjects.sort(function(a, b) {
+                return b.time - a.time;
+            });
+    
+            var latestPairs = dateObjects.slice(0, 5);
+            var table = document.getElementById('temperature');
+            latestPairs.forEach(function(pair) {
+                var formattedTime = formatDate(pair.time);
+                console.log(formattedTime, pair.temperature);
+                var newRow = table.insertRow();
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                cell1.innerHTML = formattedTime;
+                cell2.innerHTML = pair.temperature;
+            });
+
+            var dateObjects = Object.entries(w_data).map(function([key, value]) {
+                return {time: new Date(key), temperature: value};
+            });
+            
+            // Sort the Date objects
+            dateObjects.sort(function(a, b) {
+                return b.time - a.time;
+            });
+    
+            var latestPairs = dateObjects.slice(0, 5);
+            var table = document.getElementById('weight');
+            latestPairs.forEach(function(pair) {
+                var formattedTime = formatDate(pair.time);
+                console.log(formattedTime, pair.temperature);
+                var newRow = table.insertRow();
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                cell1.innerHTML = formattedTime;
+                cell2.innerHTML = pair.temperature;
+            });
+            
     
     
             var dateObjects = Object.entries(temperature_data).map(function([key, value]) {
@@ -107,7 +152,7 @@ request.open('GET', './data/data1.json', true);
             });
     
             var latestPairs = dateObjects.slice(0, 5);
-            var table = document.getElementById('temperature');
+            var table = document.getElementById('body_temperature');
             latestPairs.forEach(function(pair) {
                 var formattedTime = formatDate(pair.time);
                 console.log(formattedTime, pair.temperature);
@@ -139,7 +184,7 @@ request.open('GET', './data/data1.json', true);
                 cell2.innerHTML = pair.temperature;
             });
     
-            var dateObjects = Object.entries(alerts_data).map(function([key, value]) {
+            var dateObjects = Object.entries(blood_data).map(function([key, value]) {
                 return {time: new Date(key), temperature: value};
             });
             
@@ -149,7 +194,7 @@ request.open('GET', './data/data1.json', true);
             });
     
             var latestPairs = dateObjects.slice(0, 5);
-            var table = document.getElementById('alerts');
+            var table = document.getElementById('blood');
             latestPairs.forEach(function(pair) {
                 var formattedTime = formatDate(pair.time);
                 var newRow = table.insertRow();
@@ -178,8 +223,70 @@ setTimeout(function(){
             var heartRate_data = data['heart_rate'];
             var temperature_data = data.temperature;
             var locations_data = data.locations;
-            var alerts_data = data.alerts;
+            var blood_data = data.blood;
+            var w_data = data.w;
+            var t_data = data.t;
     
+
+            var dateObjects = Object.entries(t_data).map(function([key, value]) {
+                return {time: new Date(key), temperature: value};
+            });
+            
+            // Sort the Date objects
+            dateObjects.sort(function(a, b) {
+                return b.time - a.time;
+            });
+    
+            var latestPairs = dateObjects.slice(0, 5);
+            var table = document.getElementById('temperature');
+            while (table.rows.length > 0) {
+                table.deleteRow(0);
+            }
+            latestPairs.forEach(function(pair) {
+                var formattedTime = formatDate(pair.time);
+                console.log(formattedTime, pair.temperature);
+                var newRow = table.insertRow();
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                cell1.innerHTML = formattedTime;
+                cell2.innerHTML = pair.temperature;
+                if (pair.time > new Date(latest)) {
+                    cell1.style.color = "red";
+                    cell2.style.color = "red";
+                    cell1.style.fontWeight = "bold";
+                    cell2.style.fontWeight = "bold";
+                }
+            });
+
+            var dateObjects = Object.entries(w_data).map(function([key, value]) {
+                return {time: new Date(key), temperature: value};
+            });
+            
+            // Sort the Date objects
+            dateObjects.sort(function(a, b) {
+                return b.time - a.time;
+            });
+    
+            var latestPairs = dateObjects.slice(0, 5);
+            var table = document.getElementById('weight');
+            while (table.rows.length > 0) {
+                table.deleteRow(0);
+            }
+            latestPairs.forEach(function(pair) {
+                var formattedTime = formatDate(pair.time);
+                console.log(formattedTime, pair.temperature);
+                var newRow = table.insertRow();
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                cell1.innerHTML = formattedTime;
+                cell2.innerHTML = pair.temperature;
+                if (pair.time > new Date(latest)) {
+                    cell1.style.color = "red";
+                    cell2.style.color = "red";
+                    cell1.style.fontWeight = "bold";
+                    cell2.style.fontWeight = "bold";
+                }
+            });
             // Convert the strings to Date objects
             var dateObjects = Object.entries(heartRate_data).map(function([key, value]) {
                 return {time: new Date(key), temperature: value};
@@ -225,7 +332,7 @@ setTimeout(function(){
             });
     
             var latestPairs = dateObjects.slice(0, 5);
-            var table = document.getElementById('temperature');
+            var table = document.getElementById('body_temperature');
             while (table.rows.length > 0) {
                 table.deleteRow(0);
             }
@@ -275,7 +382,7 @@ setTimeout(function(){
                 }
             });
     
-            var dateObjects = Object.entries(alerts_data).map(function([key, value]) {
+            var dateObjects = Object.entries(blood_data).map(function([key, value]) {
                 return {time: new Date(key), temperature: value};
             });
             
@@ -285,7 +392,7 @@ setTimeout(function(){
             });
     
             var latestPairs = dateObjects.slice(0, 5);
-            var table = document.getElementById('alerts');
+            var table = document.getElementById('blood');
             while (table.rows.length > 0) {
                 table.deleteRow(0);
             }
@@ -307,148 +414,209 @@ setTimeout(function(){
     };
 
     request.send();
-setTimeout(function(){
-    var request = new XMLHttpRequest();
-    var latest = "2024/07/09 11:37:00";
-    request.open('GET', './data/data2.json', true);
+    setTimeout(function(){
+        var request = new XMLHttpRequest();
+        var latest = "2024/07/09 11:37:00";
+        request.open('GET', './data/data2.json', true);
 
-    request.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            var data = JSON.parse(this.responseText);
-    
-            var heartRate_data = data['heart_rate'];
-            var temperature_data = data.temperature;
-            var locations_data = data.locations;
-            var alerts_data = data.alerts;
-    
-            // Convert the strings to Date objects
-            var dateObjects = Object.entries(heartRate_data).map(function([key, value]) {
-                return {time: new Date(key), temperature: value};
-            });
-            
-            // Sort the Date objects
-            dateObjects.sort(function(a, b) {
-                return b.time - a.time;
-            });
-    
-            var latestPairs = dateObjects.slice(0, 5);
-            var table = document.getElementById('heart-rate');
-            while (table.rows.length > 0) {
-                table.deleteRow(0);
-            }
-            latestPairs.forEach(function(pair) {
-                var formattedTime = formatDate(pair.time);
-                console.log(formattedTime, pair.temperature);
-                var newRow = table.insertRow();
-                var cell1 = newRow.insertCell(0);
-                var cell2 = newRow.insertCell(1);
-                cell1.innerHTML = formattedTime;
-                cell2.innerHTML = pair.temperature;
-                if (pair.time > new Date(latest)) {
-                    cell1.style.color = "red";
-                    cell2.style.color = "red";
-                    cell1.style.fontWeight = "bold";
-                    cell2.style.fontWeight = "bold";
+        request.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                var data = JSON.parse(this.responseText);
+        
+                var heartRate_data = data['heart_rate'];
+                var temperature_data = data.temperature;
+                var locations_data = data.locations;
+                var blood_data = data.blood;
+                var w_data = data.w;
+                var t_data = data.t;
+        
+                var dateObjects = Object.entries(t_data).map(function([key, value]) {
+                    return {time: new Date(key), temperature: value};
+                });
+                
+                // Sort the Date objects
+                dateObjects.sort(function(a, b) {
+                    return b.time - a.time;
+                });
+        
+                var latestPairs = dateObjects.slice(0, 5);
+                var table = document.getElementById('temperature');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
                 }
-                setTimeout(function() {
-                    newRow.classList.add('fade-in');
-                  }, 1000);
-            });
+                latestPairs.forEach(function(pair) {
+                    var formattedTime = formatDate(pair.time);
+                    console.log(formattedTime, pair.temperature);
+                    var newRow = table.insertRow();
+                    var cell1 = newRow.insertCell(0);
+                    var cell2 = newRow.insertCell(1);
+                    cell1.innerHTML = formattedTime;
+                    cell2.innerHTML = pair.temperature;
+                    if (pair.time > new Date(latest)) {
+                        cell1.style.color = "red";
+                        cell2.style.color = "red";
+                        cell1.style.fontWeight = "bold";
+                        cell2.style.fontWeight = "bold";
+                    }
+                });
     
-    
-            var dateObjects = Object.entries(temperature_data).map(function([key, value]) {
-                return {time: new Date(key), temperature: value};
-            });
-            
-            // Sort the Date objects
-            dateObjects.sort(function(a, b) {
-                return b.time - a.time;
-            });
-    
-            var latestPairs = dateObjects.slice(0, 5);
-            var table = document.getElementById('temperature');
-            while (table.rows.length > 0) {
-                table.deleteRow(0);
-            }
-            latestPairs.forEach(function(pair) {
-                var formattedTime = formatDate(pair.time);
-                console.log(formattedTime, pair.temperature);
-                var newRow = table.insertRow();
-                var cell1 = newRow.insertCell(0);
-                var cell2 = newRow.insertCell(1);
-                cell1.innerHTML = formattedTime;
-                cell2.innerHTML = pair.temperature;
-                if (pair.time > new Date(latest)) {
-                    cell1.style.color = "red";
-                    cell2.style.color = "red";
-                    cell1.style.fontWeight = "bold";
-                    cell2.style.fontWeight = "bold";
+                var dateObjects = Object.entries(w_data).map(function([key, value]) {
+                    return {time: new Date(key), temperature: value};
+                });
+                
+                // Sort the Date objects
+                dateObjects.sort(function(a, b) {
+                    return b.time - a.time;
+                });
+        
+                var latestPairs = dateObjects.slice(0, 5);
+                var table = document.getElementById('weight');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
                 }
-            });
-    
-            var dateObjects = Object.entries(locations_data).map(function([key, value]) {
-                return {time: new Date(key), temperature: value};
-            });
-            
-            // Sort the Date objects
-            dateObjects.sort(function(a, b) {
-                return b.time - a.time;
-            });
-    
-            var latestPairs = dateObjects.slice(0, 5);
-            var table = document.getElementById('locations');
-            while (table.rows.length > 0) {
-                table.deleteRow(0);
-            }
-            latestPairs.forEach(function(pair) {
-                var formattedTime = formatDate(pair.time);
-                console.log(formattedTime, pair.temperature);
-                var newRow = table.insertRow();
-                var cell1 = newRow.insertCell(0);
-                var cell2 = newRow.insertCell(1);
-                cell1.innerHTML = formattedTime;
-                cell2.innerHTML = pair.temperature;
-                if (pair.time > new Date(latest)) {
-                    cell1.style.color = "red";
-                    cell2.style.color = "red";
-                    cell1.style.fontWeight = "bold";
-                    cell2.style.fontWeight = "bold";
+                latestPairs.forEach(function(pair) {
+                    var formattedTime = formatDate(pair.time);
+                    console.log(formattedTime, pair.temperature);
+                    var newRow = table.insertRow();
+                    var cell1 = newRow.insertCell(0);
+                    var cell2 = newRow.insertCell(1);
+                    cell1.innerHTML = formattedTime;
+                    cell2.innerHTML = pair.temperature;
+                    if (pair.time > new Date(latest)) {
+                        cell1.style.color = "red";
+                        cell2.style.color = "red";
+                        cell1.style.fontWeight = "bold";
+                        cell2.style.fontWeight = "bold";
+                    }
+                });
+                // Convert the strings to Date objects
+                var dateObjects = Object.entries(heartRate_data).map(function([key, value]) {
+                    return {time: new Date(key), temperature: value};
+                });
+                
+                // Sort the Date objects
+                dateObjects.sort(function(a, b) {
+                    return b.time - a.time;
+                });
+        
+                var latestPairs = dateObjects.slice(0, 5);
+                var table = document.getElementById('heart-rate');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
                 }
-            });
-    
-            var dateObjects = Object.entries(alerts_data).map(function([key, value]) {
-                return {time: new Date(key), temperature: value};
-            });
-            
-            // Sort the Date objects
-            dateObjects.sort(function(a, b) {
-                return b.time - a.time;
-            });
-    
-            var latestPairs = dateObjects.slice(0, 5);
-            var table = document.getElementById('alerts');
-            while (table.rows.length > 0) {
-                table.deleteRow(0);
-            }
-            latestPairs.forEach(function(pair) {
-                var formattedTime = formatDate(pair.time);
-                var newRow = table.insertRow();
-                var cell1 = newRow.insertCell(0);
-                var cell2 = newRow.insertCell(1);
-                cell1.innerHTML = formattedTime;
-                cell2.innerHTML = pair.temperature;
-                if (pair.time > new Date(latest)) {
-                    cell1.style.color = "red";
-                    cell2.style.color = "red";
-                    cell1.style.fontWeight = "bold";
-                    cell2.style.fontWeight = "bold";
+                latestPairs.forEach(function(pair) {
+                    var formattedTime = formatDate(pair.time);
+                    console.log(formattedTime, pair.temperature);
+                    var newRow = table.insertRow();
+                    var cell1 = newRow.insertCell(0);
+                    var cell2 = newRow.insertCell(1);
+                    cell1.innerHTML = formattedTime;
+                    cell2.innerHTML = pair.temperature;
+                    if (pair.time > new Date(latest)) {
+                        cell1.style.color = "red";
+                        cell2.style.color = "red";
+                        cell1.style.fontWeight = "bold";
+                        cell2.style.fontWeight = "bold";
+                    }
+                    setTimeout(function() {
+                        newRow.classList.add('fade-in');
+                    }, 1000);
+                });
+        
+        
+                var dateObjects = Object.entries(temperature_data).map(function([key, value]) {
+                    return {time: new Date(key), temperature: value};
+                });
+                
+                // Sort the Date objects
+                dateObjects.sort(function(a, b) {
+                    return b.time - a.time;
+                });
+        
+                var latestPairs = dateObjects.slice(0, 5);
+                var table = document.getElementById('body_temperature');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
                 }
-            });
-        }
-    };
-
-    request.send();
-}, 10000)}, 10000)
+                latestPairs.forEach(function(pair) {
+                    var formattedTime = formatDate(pair.time);
+                    console.log(formattedTime, pair.temperature);
+                    var newRow = table.insertRow();
+                    var cell1 = newRow.insertCell(0);
+                    var cell2 = newRow.insertCell(1);
+                    cell1.innerHTML = formattedTime;
+                    cell2.innerHTML = pair.temperature;
+                    if (pair.time > new Date(latest)) {
+                        cell1.style.color = "red";
+                        cell2.style.color = "red";
+                        cell1.style.fontWeight = "bold";
+                        cell2.style.fontWeight = "bold";
+                    }
+                });
+        
+                var dateObjects = Object.entries(locations_data).map(function([key, value]) {
+                    return {time: new Date(key), temperature: value};
+                });
+                
+                // Sort the Date objects
+                dateObjects.sort(function(a, b) {
+                    return b.time - a.time;
+                });
+        
+                var latestPairs = dateObjects.slice(0, 5);
+                var table = document.getElementById('locations');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+                latestPairs.forEach(function(pair) {
+                    var formattedTime = formatDate(pair.time);
+                    console.log(formattedTime, pair.temperature);
+                    var newRow = table.insertRow();
+                    var cell1 = newRow.insertCell(0);
+                    var cell2 = newRow.insertCell(1);
+                    cell1.innerHTML = formattedTime;
+                    cell2.innerHTML = pair.temperature;
+                    if (pair.time > new Date(latest)) {
+                        cell1.style.color = "red";
+                        cell2.style.color = "red";
+                        cell1.style.fontWeight = "bold";
+                        cell2.style.fontWeight = "bold";
+                    }
+                });
+        
+                var dateObjects = Object.entries(blood_data).map(function([key, value]) {
+                    return {time: new Date(key), temperature: value};
+                });
+                
+                // Sort the Date objects
+                dateObjects.sort(function(a, b) {
+                    return b.time - a.time;
+                });
+        
+                var latestPairs = dateObjects.slice(0, 5);
+                var table = document.getElementById('blood');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+                latestPairs.forEach(function(pair) {
+                    var formattedTime = formatDate(pair.time);
+                    var newRow = table.insertRow();
+                    var cell1 = newRow.insertCell(0);
+                    var cell2 = newRow.insertCell(1);
+                    cell1.innerHTML = formattedTime;
+                    cell2.innerHTML = pair.temperature;
+                    if (pair.time > new Date(latest)) {
+                        cell1.style.color = "red";
+                        cell2.style.color = "red";
+                        cell1.style.fontWeight = "bold";
+                        cell2.style.fontWeight = "bold";
+                    }
+                });
+            }
+        };
+        request.send();
+    }, 10000)
+}, 10000)
 
 
 
