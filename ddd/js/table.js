@@ -448,7 +448,7 @@ setTimeout(function(){
     };
 
     request.send();
-}, 5000)}, 5000)
+}, 5000)}, 60000)
 
 
 
