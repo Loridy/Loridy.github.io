@@ -209,7 +209,7 @@ request.open('GET', './data/data1.json', true);
     request.send();
 
 
-var latest = "2024/07/25 5:24:45";
+var latest = "2024/07/25 8:10:20";
 
 
 setTimeout(function(){
@@ -416,7 +416,7 @@ setTimeout(function(){
     request.send();
     setTimeout(function(){
         var request = new XMLHttpRequest();
-        var latest = "2024/07/25 5:25:09";
+        var latest = "2024/07/25 8:20:20";
         request.open('GET', './data/data2.json', true);
 
         request.onreadystatechange = function() {
